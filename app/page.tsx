@@ -235,8 +235,13 @@ export default function Home() {
         <div className="competency-grid">{competencies.map((item, index) => <div className="competency reveal" key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong><i>↗</i></div>)}</div>
       </section>
 
+      <section className="process section" id="metodo">
+        <div className="label reveal"><span>04</span>Il nostro metodo</div>
+        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
+      </section>
+
       <section className="studio section" id="studio">
-        <div className="label reveal"><span>04</span>Il team</div>
+        <div className="label reveal"><span>05</span>Il team</div>
         <div className="studio-grid"><h2 className="reveal">Una rete.<br />Un obiettivo<br /><em>comune.</em></h2><div className="studio-copy reveal"><p>Flabber Studio è una rete di professionisti che collaborano per costruire progetti di comunicazione efficaci.</p><p>Strategia, contenuti, sviluppo web, produzione foto e video: ogni progetto coinvolge le competenze necessarie per raggiungere l&apos;obiettivo.</p><p>Un approccio flessibile, dinamico e costruito attorno alle reali esigenze delle attività che seguiamo.</p></div></div>
         <div className="studio-gallery reveal" aria-label="Flabber Studio dietro le quinte">
           <figure><img src="/studio/studio-workspace.webp" alt="Workspace creativo Flabber Studio" loading="lazy" decoding="async" /><figcaption><span>01</span>Direzione creativa</figcaption></figure>
@@ -245,14 +250,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="process section" id="metodo">
-        <div className="label reveal"><span>05</span>Il nostro metodo</div>
-        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
-      </section>
-
       <section className="work" id="progetti">
         <div className="work-head section"><div className="label reveal"><span>06</span>Portfolio</div><h2 className="reveal">Dietro ogni progetto<br />c&apos;è una storia <em>diversa.</em></h2><p className="portfolio-intro reveal">Non lavoriamo con soluzioni preimpostate, ma costruiamo percorsi che si adattano alle persone, alle attività e agli obiettivi che seguiamo.</p></div>
         <div className="project-showcase">
+          <div className="project-statement section reveal"><span>Il lavoro prende forma</span><h3>Le idee diventano reali<br />quando iniziano a <em>muoversi.</em></h3></div>
           <div className="project-showcase-head reveal"><span>Selected productions · 2024—2026</span><span>Il lavoro, mentre prende forma</span></div>
           <div className="project-carousel" role="region" aria-label="Carosello continuo dei progetti Flabber Studio" tabIndex={0}>
             <div className="project-track">
