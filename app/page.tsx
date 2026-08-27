@@ -197,7 +197,6 @@ export default function Home() {
             <figcaption><span>Human × Technology</span><span>Flabber Studio</span></figcaption>
           </figure>
         </div>
-        <div className="manifesto-copy reveal"><p>Costruiamo presenza.</p><small>Una presenza efficace nasce dalla costanza, dalla coerenza e dalla capacità di costruire fiducia nel tempo.</small></div>
       </section>
 
       <section className="services section" id="servizi">
@@ -249,7 +248,6 @@ export default function Home() {
           <figure><img src="/studio/studio-on-location.webp" alt="Videomaker Flabber durante una produzione in location" loading="lazy" decoding="async" /><figcaption><span>02</span>On location</figcaption></figure>
           <figure><img src="/studio/studio-event.webp" alt="Operatore Flabber durante la copertura video di un evento" loading="lazy" decoding="async" /><figcaption><span>03</span>Event coverage</figcaption></figure>
         </div>
-        <div className="network-mark reveal" aria-hidden="true"><i /><i /><i /><span className="network-logo"><img src="/branding/flabber-symbol.png" alt="" /></span></div>
       </section>
 
       <section className="work" id="progetti">
