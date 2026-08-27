@@ -195,7 +195,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="project-showcase-foot section reveal"><p>Strategia, riprese, fotografia e contenuti: entriamo nei progetti per raccontarli da vicino.</p><span>Passa sopra per fermare →</span></div>
+          <div className="project-showcase-foot section reveal"><p>Strategia, riprese, fotografia e contenuti: entriamo nei progetti per raccontarli da vicino.</p><span>Scorrimento continuo →</span></div>
         </div>
       </section>
 
