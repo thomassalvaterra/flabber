@@ -202,7 +202,19 @@ export default function Home() {
             <div className="deck-heading reveal"><span>La nostra direzione, in sette frame</span><span>Scorri verso il basso ↓</span></div>
             <div className="service-deck-viewport" aria-label="Presentazione dei servizi Flabber Studio">
               <div className="service-deck-track">
-                {serviceSlides.map((slide, index) => <figure key={slide.src}><img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" /><figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption></figure>)}
+                {serviceSlides.map((slide, index) => (
+                  <figure key={slide.src}>
+                    {index === serviceSlides.length - 1 ? (
+                      <div className="service-cta-slide" role="img" aria-label={slide.alt}>
+                        <span className="cta-kicker">Digital Agency</span>
+                        <span className="cta-ready">Pronti quando lo sei tu</span>
+                        <h3><span>Se hai un&apos;attività</span><span>che merita</span><span>di essere vista,</span><em>parliamoci.</em></h3>
+                        <span className="cta-signature">Flabber Studio</span>
+                      </div>
+                    ) : <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" />}
+                    <figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption>
+                  </figure>
+                ))}
               </div>
             </div>
           </div>
