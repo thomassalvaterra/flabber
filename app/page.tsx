@@ -190,7 +190,13 @@ export default function Home() {
 
       <section className="teaser" id="manifesto">
         <p><span>01</span> Manifesto</p>
-        <h2 className="reveal">Non facciamo<br />solo <em>contenuti.</em></h2>
+        <div className="manifesto-stage">
+          <h2 className="reveal">Non facciamo<br />solo <em>contenuti.</em></h2>
+          <figure className="manifesto-visual reveal">
+            <div className="manifesto-card"><img src="/manifesto/human-machine.jpg" alt="Una mano umana e una mano robotica si avvicinano attraverso un cerchio luminoso" /></div>
+            <figcaption><span>Human × Technology</span><span>Flabber Studio</span></figcaption>
+          </figure>
+        </div>
         <div className="manifesto-copy reveal"><p>Costruiamo presenza.</p><small>Una presenza efficace nasce dalla costanza, dalla coerenza e dalla capacità di costruire fiducia nel tempo.</small></div>
       </section>
 
