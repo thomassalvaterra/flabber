@@ -171,12 +171,12 @@ export default function Home() {
       <div className="progress" aria-hidden="true" />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a>
-        <nav aria-label="Navigazione principale"><a href="#manifesto">Manifesto</a><a href="#servizi">Servizi</a><a href="#metodo">Metodo</a><a href="#studio">Studio</a></nav>
+        <nav aria-label="Navigazione principale"><a href="#top">Home</a><a href="#servizi">Servizi</a><a href="#progetti">Progetti</a><a href="#contatti">Contatti</a></nav>
         <a className="talk" href="#contatti">Parliamone <span>↗</span></a>
         <button className="menu-button" aria-label="Apri il menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
       </header>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
-        <a href="#manifesto" onClick={closeMenu}>Manifesto</a><a href="#servizi" onClick={closeMenu}>Servizi</a><a href="#metodo" onClick={closeMenu}>Metodo</a><a href="#studio" onClick={closeMenu}>Studio</a><a href="#contatti" onClick={closeMenu}>Contatti</a>
+        <a href="#top" onClick={closeMenu}>Home</a><a href="#servizi" onClick={closeMenu}>Servizi</a><a href="#progetti" onClick={closeMenu}>Progetti</a><a href="#contatti" onClick={closeMenu}>Contatti</a>
       </div>
 
       <section className="hero" id="top">
