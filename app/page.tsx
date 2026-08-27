@@ -122,6 +122,48 @@ export default function Home() {
     return () => { observer.disconnect(); removeEventListener('scroll', onScroll); };
   }, []);
 
+  useEffect(() => {
+    const stage = document.querySelector<HTMLElement>('.service-deck-stage');
+    const viewport = document.querySelector<HTMLElement>('.service-deck-viewport');
+    const track = document.querySelector<HTMLElement>('.service-deck-track');
+    if (!stage || !viewport || !track) return;
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let frame = 0;
+    let travel = 0;
+
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (reduced) {
+          track.style.transform = '';
+          return;
+        }
+        const offset = Math.min(Math.max(-stage.getBoundingClientRect().top, 0), travel);
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      });
+    };
+
+    const measure = () => {
+      travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      stage.style.height = reduced ? 'auto' : `${innerHeight + travel}px`;
+      update();
+    };
+
+    track.querySelectorAll('img').forEach((image) => {
+      if (!image.complete) image.addEventListener('load', measure, { once: true });
+    });
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', measure);
+    measure();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      removeEventListener('scroll', update);
+      removeEventListener('resize', measure);
+    };
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -155,9 +197,15 @@ export default function Home() {
       <section className="services section" id="servizi">
         <div className="label reveal"><span>02</span>Cosa facciamo</div>
         <div className="services-title reveal"><h2>Tutto quello<br />che <em>ti serve.</em></h2><p>Dalla gestione dei social alla produzione di contenuti, dai siti web alla strategia digitale: coinvolgiamo le competenze necessarie per trasformare le idee in risultati concreti.</p></div>
-        <div className="deck-heading reveal"><span>La nostra direzione, in sette frame</span><span>Trascina per esplorare →</span></div>
-        <div className="service-deck" aria-label="Presentazione dei servizi Flabber Studio">
-          {serviceSlides.map((slide, index) => <figure key={slide.src}><img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" /><figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption></figure>)}
+        <div className="service-deck-stage">
+          <div className="service-deck-sticky">
+            <div className="deck-heading reveal"><span>La nostra direzione, in sette frame</span><span>Scorri verso il basso ↓</span></div>
+            <div className="service-deck-viewport" aria-label="Presentazione dei servizi Flabber Studio">
+              <div className="service-deck-track">
+                {serviceSlides.map((slide, index) => <figure key={slide.src}><img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" /><figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption></figure>)}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="service-list">
           {services.map((service, index) => <article className="service reveal" key={service.title}><b>{String(index + 1).padStart(2, '0')}</b><h3>{service.title}</h3><p>{service.text}</p><i className={`glyph ${service.glyph}`} aria-hidden="true" /></article>)}
