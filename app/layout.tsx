@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     description: 'Non facciamo solo contenuti. Costruiamo presenza con comunicazione, strategia e creatività.',
     images: ['/og.png'],
   },
+  icons: {
+    icon: '/branding/flabber-symbol.png',
+    apple: '/branding/flabber-symbol.png',
+  },
 };
 
 export default function RootLayout({

@@ -117,7 +117,7 @@ export default function Home() {
     <main>
       <div className="progress" aria-hidden="true" />
       <header className="site-header">
-        <a className="brand" href="#top"><span className="brand-mark" />FLABBER</a>
+        <a className="brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a>
         <nav aria-label="Navigazione principale"><a href="#manifesto">Manifesto</a><a href="#servizi">Servizi</a><a href="#metodo">Metodo</a><a href="#studio">Studio</a></nav>
         <a className="talk" href="#contatti">Parliamone <span>↗</span></a>
         <button className="menu-button" aria-label="Apri il menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
@@ -167,7 +167,7 @@ export default function Home() {
       <section className="studio section" id="studio">
         <div className="label reveal"><span>05</span>Il team</div>
         <div className="studio-grid"><h2 className="reveal">Una rete.<br />Un obiettivo<br /><em>comune.</em></h2><div className="studio-copy reveal"><p>Flabber Studio è una rete di professionisti che collaborano per costruire progetti di comunicazione efficaci.</p><p>Strategia, contenuti, sviluppo web, produzione foto e video: ogni progetto coinvolge le competenze necessarie per raggiungere l&apos;obiettivo.</p><p>Un approccio flessibile, dinamico e costruito attorno alle reali esigenze delle attività che seguiamo.</p></div></div>
-        <div className="network-mark reveal" aria-hidden="true"><i /><i /><i /><b>FLABBER<br />NETWORK</b></div>
+        <div className="network-mark reveal" aria-hidden="true"><i /><i /><i /><span className="network-logo"><img src="/branding/flabber-symbol.png" alt="" /></span></div>
       </section>
 
       <section className="work" id="progetti">
@@ -180,7 +180,7 @@ export default function Home() {
       <section className="contact" id="contatti">
         <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>07</span>Contatti</div>
         <h2 className="reveal">Se hai un&apos;attività<br />che merita di essere <em>vista,</em><br />parliamoci.</h2><a className="mail reveal" href="mailto:hello@flabber.it">hello@flabber.it <span>↗</span></a>
-        <footer><a className="brand" href="#top"><span className="brand-mark" />FLABBER</a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
+        <footer><a className="brand footer-brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
       </section>
     </main>
   );
