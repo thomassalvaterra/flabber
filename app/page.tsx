@@ -235,19 +235,19 @@ export default function Home() {
         <div className="competency-grid">{competencies.map((item, index) => <div className="competency reveal" key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong><i>↗</i></div>)}</div>
       </section>
 
-      <section className="process section" id="metodo">
-        <div className="label reveal"><span>04</span>Il nostro metodo</div>
-        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
-      </section>
-
       <section className="studio section" id="studio">
-        <div className="label reveal"><span>05</span>Il team</div>
+        <div className="label reveal"><span>04</span>Il team</div>
         <div className="studio-grid"><h2 className="reveal">Una rete.<br />Un obiettivo<br /><em>comune.</em></h2><div className="studio-copy reveal"><p>Flabber Studio è una rete di professionisti che collaborano per costruire progetti di comunicazione efficaci.</p><p>Strategia, contenuti, sviluppo web, produzione foto e video: ogni progetto coinvolge le competenze necessarie per raggiungere l&apos;obiettivo.</p><p>Un approccio flessibile, dinamico e costruito attorno alle reali esigenze delle attività che seguiamo.</p></div></div>
         <div className="studio-gallery reveal" aria-label="Flabber Studio dietro le quinte">
           <figure><img src="/studio/studio-workspace.webp" alt="Workspace creativo Flabber Studio" loading="lazy" decoding="async" /><figcaption><span>01</span>Direzione creativa</figcaption></figure>
           <figure><img src="/studio/studio-on-location.webp" alt="Videomaker Flabber durante una produzione in location" loading="lazy" decoding="async" /><figcaption><span>02</span>On location</figcaption></figure>
           <figure><img src="/studio/studio-event.webp" alt="Operatore Flabber durante la copertura video di un evento" loading="lazy" decoding="async" /><figcaption><span>03</span>Event coverage</figcaption></figure>
         </div>
+      </section>
+
+      <section className="process section" id="metodo">
+        <div className="label reveal"><span>05</span>Il nostro metodo</div>
+        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
       </section>
 
       <section className="work" id="progetti">
@@ -271,6 +271,7 @@ export default function Home() {
       <section className="contact" id="contatti">
         <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>07</span>Contatti</div>
         <h2 className="reveal">Se hai un&apos;attività<br />che merita di essere <em>vista,</em><br />parliamoci.</h2><a className="mail reveal" href="mailto:info@flabber.it">info@flabber.it <span>↗</span></a>
+        <div className="contact-details reveal"><a href="tel:+393349950761">3349950761</a><address>Via Alessandro Rossi, 101<br />36013 Piovene Rocchette (VI)</address></div>
         <footer><a className="brand footer-brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
       </section>
     </main>
