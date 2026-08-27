@@ -206,7 +206,7 @@ export default function Home() {
 
       <section className="contact" id="contatti">
         <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>07</span>Contatti</div>
-        <h2 className="reveal">Se hai un&apos;attività<br />che merita di essere <em>vista,</em><br />parliamoci.</h2><a className="mail reveal" href="mailto:hello@flabber.it">hello@flabber.it <span>↗</span></a>
+        <h2 className="reveal">Se hai un&apos;attività<br />che merita di essere <em>vista,</em><br />parliamoci.</h2><a className="mail reveal" href="mailto:info@flabber.it">info@flabber.it <span>↗</span></a>
         <footer><a className="brand footer-brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
       </section>
     </main>
