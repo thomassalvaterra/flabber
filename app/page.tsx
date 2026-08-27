@@ -2,6 +2,26 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+const serviceSlides = [
+  { src: '/services/01-overview.png', alt: 'Tutto quello che ti serve - panoramica dei servizi Flabber Studio' },
+  { src: '/services/02-comunicazione.png', alt: 'Comunicazione - dire la cosa giusta, nel momento giusto, alle persone giuste' },
+  { src: '/services/03-posizionamento.png', alt: 'Posizionamento - trovare uno spazio riconoscibile nel mercato' },
+  { src: '/services/04-strategia.png', alt: 'Strategia - un piano digitale costruito sugli obiettivi' },
+  { src: '/services/05-contenuti.png', alt: 'Contenuti - testi, visual e video che fanno fermare lo scroll' },
+  { src: '/services/06-crescita.png', alt: 'Crescita - community, visibilità e conversioni reali' },
+  { src: '/services/07-cta.png', alt: 'Se hai una attività che merita di essere vista, parliamoci' },
+];
+
+const services = [
+  { title: 'Comunicazione', text: 'La comunicazione non è dire tutto. È capire cosa dire, a chi dirlo e come farlo arrivare nel modo giusto. Perché ogni attività ha qualcosa da raccontare, ma non tutte riescono a farlo percepire.', glyph: 'eye' },
+  { title: 'Posizionamento', text: 'In un mercato pieno di alternative, essere presenti non basta. Troviamo ciò che rende la tua attività diversa e lo trasformiamo in qualcosa di riconoscibile.', glyph: 'rings' },
+  { title: 'Strategia', text: 'Ogni risultato nasce da una direzione chiara. Costruiamo strategie digitali pensate per dare coerenza alle azioni, continuità alla comunicazione e valore nel tempo.', glyph: 'wave' },
+  { title: 'Contenuti', text: 'Ogni attività ha qualcosa da raccontare. Il nostro compito è trasformarlo in contenuti capaci di attirare attenzione, trasmettere valore e rendere riconoscibile ciò che fai.', glyph: 'eye' },
+  { title: 'Crescita', text: 'La crescita non si misura soltanto nei numeri. Si vede nelle richieste che arrivano, nelle opportunità che si creano e nel modo in cui le persone iniziano a percepire la tua attività.', glyph: 'rings' },
+];
+
+const competencies = ['Gestione social', 'Branding', 'Shooting', 'Video', 'Advertising', 'Siti web', 'Consulenze', 'Progetti speciali'];
+
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -98,70 +118,69 @@ export default function Home() {
       <div className="progress" aria-hidden="true" />
       <header className="site-header">
         <a className="brand" href="#top"><span className="brand-mark" />FLABBER</a>
-        <nav aria-label="Navigazione principale"><a href="#manifesto">Manifesto</a><a href="#servizi">Servizi</a><a href="#progetti">Progetti</a></nav>
+        <nav aria-label="Navigazione principale"><a href="#manifesto">Manifesto</a><a href="#servizi">Servizi</a><a href="#metodo">Metodo</a><a href="#studio">Studio</a></nav>
         <a className="talk" href="#contatti">Parliamone <span>↗</span></a>
         <button className="menu-button" aria-label="Apri il menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
       </header>
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
-        <a href="#manifesto" onClick={closeMenu}>Manifesto</a><a href="#servizi" onClick={closeMenu}>Servizi</a><a href="#progetti" onClick={closeMenu}>Progetti</a><a href="#contatti" onClick={closeMenu}>Contatti</a>
+        <a href="#manifesto" onClick={closeMenu}>Manifesto</a><a href="#servizi" onClick={closeMenu}>Servizi</a><a href="#metodo" onClick={closeMenu}>Metodo</a><a href="#studio" onClick={closeMenu}>Studio</a><a href="#contatti" onClick={closeMenu}>Contatti</a>
       </div>
+
       <section className="hero" id="top">
         <canvas ref={canvasRef} aria-label="Forma tridimensionale astratta animata" />
         <div className="vignette" />
-        <p className="eyebrow">Independent digital studio · Italy</p>
+        <p className="eyebrow">Flabber Studio · Digital Agency</p>
         <h1><span>WE MAKE</span><span>IDEAS <em>MOVE</em></span></h1>
-        <p className="intro">Strategia, identità e tecnologia<br />per brand impossibili da ignorare.</p>
+        <p className="intro">Non facciamo solo contenuti.<br />Costruiamo presenza.</p>
         <a className="scroll" href="#manifesto"><small>SCROLL</small><b>↓</b></a>
       </section>
+
       <section className="teaser" id="manifesto">
         <p><span>01</span> Manifesto</p>
-        <h2 className="reveal">Le idee migliori<br />non stanno <em>ferme.</em></h2>
-        <div className="manifesto-copy reveal"><p>Flabber trasforma intuizioni audaci in esperienze digitali vive. Uniamo pensiero strategico, design e codice per costruire identità che si fanno ricordare.</p><small>Non inseguiamo l’effetto.<br />Progettiamo il ricordo.</small></div>
+        <h2 className="reveal">Non facciamo<br />solo <em>contenuti.</em></h2>
+        <div className="manifesto-copy reveal"><p>Costruiamo presenza.</p><small>Una presenza efficace nasce dalla costanza, dalla coerenza e dalla capacità di costruire fiducia nel tempo.</small></div>
       </section>
 
       <section className="services section" id="servizi">
         <div className="label reveal"><span>02</span>Cosa facciamo</div>
-        <div className="services-title reveal"><h2>Pensiero forte.<br /><em>Esecuzione fluida.</em></h2><p>Dalla prima domanda all’ultimo pixel, costruiamo sistemi coerenti, scalabili e decisamente umani.</p></div>
+        <div className="services-title reveal"><h2>Tutto quello<br />che <em>ti serve.</em></h2><p>Dalla gestione dei social alla produzione di contenuti, dai siti web alla strategia digitale: coinvolgiamo le competenze necessarie per trasformare le idee in risultati concreti.</p></div>
+        <div className="deck-heading reveal"><span>La nostra direzione, in sette frame</span><span>Trascina per esplorare →</span></div>
+        <div className="service-deck" aria-label="Presentazione dei servizi Flabber Studio">
+          {serviceSlides.map((slide, index) => <figure key={slide.src}><img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" /><figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption></figure>)}
+        </div>
         <div className="service-list">
-          <article className="service reveal"><b>01</b><h3>Brand strategy<br />& identity</h3><p>Posizionamento, voce, identità visiva e linee guida per brand con qualcosa di vero da dire.</p><i className="glyph eye" /></article>
-          <article className="service reveal"><b>02</b><h3>Web design<br />& development</h3><p>Siti editoriali, e-commerce ed esperienze digitali veloci, inclusive e progettate per convertire.</p><i className="glyph rings" /></article>
-          <article className="service reveal"><b>03</b><h3>Motion<br />& 3D worlds</h3><p>Animazione, art direction e spazi tridimensionali interattivi per aggiungere profondità al racconto.</p><i className="glyph wave" /></article>
+          {services.map((service, index) => <article className="service reveal" key={service.title}><b>{String(index + 1).padStart(2, '0')}</b><h3>{service.title}</h3><p>{service.text}</p><i className={`glyph ${service.glyph}`} aria-hidden="true" /></article>)}
         </div>
       </section>
 
+      <section className="competencies section">
+        <div className="label reveal"><span>03</span>Le nostre competenze</div>
+        <div className="competencies-head reveal"><h2>Un solo studio.<br /><em>Molte direzioni.</em></h2><p>Mettiamo attorno al progetto le persone e le competenze che servono davvero.</p></div>
+        <div className="competency-grid">{competencies.map((item, index) => <div className="competency reveal" key={item}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item}</strong><i>↗</i></div>)}</div>
+      </section>
+
+      <section className="process section" id="metodo">
+        <div className="label reveal"><span>04</span>Il nostro metodo</div>
+        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
+      </section>
+
+      <section className="studio section" id="studio">
+        <div className="label reveal"><span>05</span>Il team</div>
+        <div className="studio-grid"><h2 className="reveal">Una rete.<br />Un obiettivo<br /><em>comune.</em></h2><div className="studio-copy reveal"><p>Flabber Studio è una rete di professionisti che collaborano per costruire progetti di comunicazione efficaci.</p><p>Strategia, contenuti, sviluppo web, produzione foto e video: ogni progetto coinvolge le competenze necessarie per raggiungere l&apos;obiettivo.</p><p>Un approccio flessibile, dinamico e costruito attorno alle reali esigenze delle attività che seguiamo.</p></div></div>
+        <div className="network-mark reveal" aria-hidden="true"><i /><i /><i /><b>FLABBER<br />NETWORK</b></div>
+      </section>
+
       <section className="work" id="progetti">
-        <div className="work-head section"><div className="label reveal"><span>03</span>Selected work</div><h2 className="reveal">Ogni progetto<br />ha il suo <em>ritmo.</em></h2></div>
-        <article className="project roto">
-          <div className="project-meta"><span>Brand system · Digital</span><span>2026</span></div><h3>ROTO</h3>
-          <div className="roto-art" aria-hidden="true"><i /><i /><b>R</b></div>
-          <p>Energia circolare per una piattaforma che rimette in moto le comunità.</p>
-        </article>
-        <article className="project nova">
-          <div className="project-meta"><span>Experience · E-commerce</span><span>2026</span></div><h3>SUPER<br />NOVA</h3>
-          <div className="nova-art" aria-hidden="true"><i /><b /></div>
-          <p>Una nuova orbita digitale per un marchio di prodotti fuori categoria.</p>
-        </article>
-        <article className="project oltre">
-          <div className="project-meta"><span>Strategy · Editorial</span><span>2025</span></div><h3>OLTRE</h3>
-          <div className="oltre-art" aria-hidden="true"><i>ANDIAMO<br /><em>OLTRE</em></i><i>SENZA<br />PAURA</i><i>INSIEME<br />ORA</i></div>
-          <p>Un’identità editoriale aperta, inclusiva e sempre in trasformazione.</p>
-        </article>
-      </section>
-
-      <section className="numbers section">
-        <div className="label reveal"><span>04</span>In numeri</div>
-        <div className="number-grid"><article className="reveal"><strong>42</strong><sup>+</sup><p>brand messi<br />in movimento</p></article><article className="reveal"><strong>11</strong><sup>y</sup><p>di esperienza<br />condivisa</p></article><article className="reveal"><strong>6</strong><sup>×</sup><p>discipline in<br />un solo studio</p></article></div>
-      </section>
-
-      <section className="process section">
-        <div className="label reveal"><span>05</span>Come lavoriamo</div>
-        <div className="process-grid"><h2 className="reveal">Curiosi per<br />metodo. <em>Precisi</em><br />per natura.</h2><div className="steps"><article className="reveal"><b>01</b><div><h3>Ascoltiamo</h3><p>Entriamo nel contesto, facciamo domande scomode e troviamo ciò che conta davvero.</p></div></article><article className="reveal"><b>02</b><div><h3>Diamo forma</h3><p>Trasformiamo gli insight in un sistema visivo e narrativo riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Facciamo muovere</h3><p>Portiamo tutto nel mondo con tecnologia, motion e cura maniacale del dettaglio.</p></div></article></div></div>
+        <div className="work-head section"><div className="label reveal"><span>06</span>Portfolio</div><h2 className="reveal">Dietro ogni progetto<br />c&apos;è una storia <em>diversa.</em></h2><p className="portfolio-intro reveal">Non lavoriamo con soluzioni preimpostate, ma costruiamo percorsi che si adattano alle persone, alle attività e agli obiettivi che seguiamo.</p></div>
+        <article className="project roto"><div className="project-meta"><span>Branding · Posizionamento</span><span>Identità</span></div><h3>SEGNO</h3><div className="roto-art" aria-hidden="true"><i /><i /><b>F</b></div><p>Rendere riconoscibile ciò che rende la tua attività diversa.</p></article>
+        <article className="project nova"><div className="project-meta"><span>Siti web · Advertising</span><span>Digitale</span></div><h3>SPA<br />ZIO</h3><div className="nova-art" aria-hidden="true"><i /><b /></div><p>Costruire lo spazio digitale giusto e trasformarlo in opportunità concrete.</p></article>
+        <article className="project oltre"><div className="project-meta"><span>Social · Foto · Video</span><span>Contenuti</span></div><h3>VOCE</h3><div className="oltre-art" aria-hidden="true"><i>TESTI<br /><em>VISUAL</em></i><i>FOTO<br />VIDEO</i><i>VALORE<br />RITMO</i></div><p>Contenuti capaci di attirare attenzione e far percepire il valore di ciò che fai.</p></article>
       </section>
 
       <section className="contact" id="contatti">
-        <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>06</span>Start something</div>
-        <h2 className="reveal">Hai un’idea<br />che vuole <em>muoversi?</em></h2><a className="mail reveal" href="mailto:hello@flabber.it">hello@flabber.it <span>↗</span></a>
-        <footer><a className="brand" href="#top"><span className="brand-mark" />FLABBER</a><p>Creative studio · Italy<br />© 2026 Flabber</p><div><a href="#">Instagram</a><a href="#">LinkedIn</a></div></footer>
+        <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>07</span>Contatti</div>
+        <h2 className="reveal">Se hai un&apos;attività<br />che merita di essere <em>vista,</em><br />parliamoci.</h2><a className="mail reveal" href="mailto:hello@flabber.it">hello@flabber.it <span>↗</span></a>
+        <footer><a className="brand" href="#top"><span className="brand-mark" />FLABBER</a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
       </section>
     </main>
   );

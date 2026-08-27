@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://flabber-made-to-move.thomas-salvaterra21.chatgpt.site'),
   title: 'Flabber — Made to move',
-  description: 'Strategia, identità e tecnologia per brand impossibili da ignorare.',
+  description: 'Non facciamo solo contenuti. Costruiamo presenza con comunicazione, strategia e creatività.',
   openGraph: {
     title: 'Flabber — Made to move',
-    description: 'Strategia, identità e tecnologia per brand impossibili da ignorare.',
+    description: 'Non facciamo solo contenuti. Costruiamo presenza con comunicazione, strategia e creatività.',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Flabber — Made to move' }],
     locale: 'it_IT',
     type: 'website',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Flabber — Made to move',
-    description: 'Strategia, identità e tecnologia per brand impossibili da ignorare.',
+    description: 'Non facciamo solo contenuti. Costruiamo presenza con comunicazione, strategia e creatività.',
     images: ['/og.png'],
   },
 };
