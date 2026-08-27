@@ -178,6 +178,11 @@ export default function Home() {
       <section className="studio section" id="studio">
         <div className="label reveal"><span>05</span>Il team</div>
         <div className="studio-grid"><h2 className="reveal">Una rete.<br />Un obiettivo<br /><em>comune.</em></h2><div className="studio-copy reveal"><p>Flabber Studio è una rete di professionisti che collaborano per costruire progetti di comunicazione efficaci.</p><p>Strategia, contenuti, sviluppo web, produzione foto e video: ogni progetto coinvolge le competenze necessarie per raggiungere l&apos;obiettivo.</p><p>Un approccio flessibile, dinamico e costruito attorno alle reali esigenze delle attività che seguiamo.</p></div></div>
+        <div className="studio-gallery reveal" aria-label="Flabber Studio dietro le quinte">
+          <figure><img src="/studio/studio-workspace.webp" alt="Workspace creativo Flabber Studio" loading="lazy" decoding="async" /><figcaption><span>01</span>Direzione creativa</figcaption></figure>
+          <figure><img src="/studio/studio-on-location.webp" alt="Videomaker Flabber durante una produzione in location" loading="lazy" decoding="async" /><figcaption><span>02</span>On location</figcaption></figure>
+          <figure><img src="/studio/studio-event.webp" alt="Operatore Flabber durante la copertura video di un evento" loading="lazy" decoding="async" /><figcaption><span>03</span>Event coverage</figcaption></figure>
+        </div>
         <div className="network-mark reveal" aria-hidden="true"><i /><i /><i /><span className="network-logo"><img src="/branding/flabber-symbol.png" alt="" /></span></div>
       </section>
 
