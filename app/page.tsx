@@ -22,6 +22,17 @@ const services = [
 
 const competencies = ['Gestione social', 'Branding', 'Shooting', 'Video', 'Advertising', 'Siti web', 'Consulenze', 'Progetti speciali'];
 
+const projectImages = [
+  { src: '/projects/project-01.webp', alt: 'Ripresa con smartphone e microfoni in una location outdoor' },
+  { src: '/projects/project-02.webp', alt: 'Backstage di uno shooting in studio con il team Flabber' },
+  { src: '/projects/project-03.webp', alt: 'Team Flabber al lavoro su un set fotografico' },
+  { src: '/projects/project-04.webp', alt: 'Studio fotografico allestito per una produzione automotive' },
+  { src: '/projects/project-05.webp', alt: 'Produzione video durante il detailing di una Ferrari' },
+  { src: '/projects/project-06.webp', alt: 'Set creativo con macchina da cucire, luci e fumo scenico' },
+  { src: '/projects/project-07.webp', alt: 'Ripresa video di una lavorazione industriale' },
+  { src: '/projects/project-08.webp', alt: 'Shooting fotografico lifestyle in studio' },
+];
+
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -172,9 +183,20 @@ export default function Home() {
 
       <section className="work" id="progetti">
         <div className="work-head section"><div className="label reveal"><span>06</span>Portfolio</div><h2 className="reveal">Dietro ogni progetto<br />c&apos;è una storia <em>diversa.</em></h2><p className="portfolio-intro reveal">Non lavoriamo con soluzioni preimpostate, ma costruiamo percorsi che si adattano alle persone, alle attività e agli obiettivi che seguiamo.</p></div>
-        <article className="project roto"><div className="project-meta"><span>Branding · Posizionamento</span><span>Identità</span></div><h3>SEGNO</h3><div className="roto-art" aria-hidden="true"><i /><i /><b>F</b></div><p>Rendere riconoscibile ciò che rende la tua attività diversa.</p></article>
-        <article className="project nova"><div className="project-meta"><span>Siti web · Advertising</span><span>Digitale</span></div><h3>SPA<br />ZIO</h3><div className="nova-art" aria-hidden="true"><i /><b /></div><p>Costruire lo spazio digitale giusto e trasformarlo in opportunità concrete.</p></article>
-        <article className="project oltre"><div className="project-meta"><span>Social · Foto · Video</span><span>Contenuti</span></div><h3>VOCE</h3><div className="oltre-art" aria-hidden="true"><i>TESTI<br /><em>VISUAL</em></i><i>FOTO<br />VIDEO</i><i>VALORE<br />RITMO</i></div><p>Contenuti capaci di attirare attenzione e far percepire il valore di ciò che fai.</p></article>
+        <div className="project-showcase">
+          <div className="project-showcase-head reveal"><span>Selected productions · 2024—2026</span><span>Il lavoro, mentre prende forma</span></div>
+          <div className="project-carousel" role="region" aria-label="Carosello continuo dei progetti Flabber Studio" tabIndex={0}>
+            <div className="project-track">
+              {[...projectImages, ...projectImages].map((project, index) => (
+                <figure className="project-frame" key={`${project.src}-${index}`} aria-hidden={index >= projectImages.length ? true : undefined}>
+                  <img src={project.src} alt={index < projectImages.length ? project.alt : ''} loading="lazy" decoding="async" />
+                  <figcaption><span>{String((index % projectImages.length) + 1).padStart(2, '0')}</span><span>Flabber Studio / Production</span></figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+          <div className="project-showcase-foot section reveal"><p>Strategia, riprese, fotografia e contenuti: entriamo nei progetti per raccontarli da vicino.</p><span>Passa sopra per fermare →</span></div>
+        </div>
       </section>
 
       <section className="contact" id="contatti">
