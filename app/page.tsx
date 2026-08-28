@@ -255,7 +255,6 @@ export default function Home() {
       <section className="work" id="progetti">
         <div className="work-head section"><div className="label reveal"><span>06</span>Portfolio</div><h2 className="reveal">Dietro ogni progetto<br />c&apos;è una storia <em>diversa.</em></h2><p className="portfolio-intro reveal">Non lavoriamo con soluzioni preimpostate, ma costruiamo percorsi che si adattano alle persone, alle attività e agli obiettivi che seguiamo.</p></div>
         <div className="project-showcase">
-          <div className="project-statement section reveal"><span>Il lavoro prende forma</span><h3>Le idee diventano reali<br />quando iniziano a <em>muoversi.</em></h3></div>
           <div className="project-showcase-head reveal"><span>Selected productions · 2024—2026</span><span>Il lavoro, mentre prende forma</span></div>
           <div className="project-carousel" role="region" aria-label="Carosello continuo dei progetti Flabber Studio" tabIndex={0}>
             <div className="project-track">
