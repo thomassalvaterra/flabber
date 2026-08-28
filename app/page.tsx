@@ -164,6 +164,39 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduced || !canHover) return;
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.project-frame, .studio-gallery figure'));
+    const cleanups = cards.map((card) => {
+      const move = (event: PointerEvent) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - .5) * 2;
+        const y = ((event.clientY - rect.top) / rect.height - .5) * 2;
+        card.style.setProperty('--tilt-x', `${(-y * 6).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${(x * 8).toFixed(2)}deg`);
+        card.style.setProperty('--light-x', `${((x + 1) * 50).toFixed(1)}%`);
+        card.style.setProperty('--light-y', `${((y + 1) * 50).toFixed(1)}%`);
+      };
+      const leave = () => {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--light-x', '50%');
+        card.style.setProperty('--light-y', '50%');
+      };
+      card.addEventListener('pointermove', move);
+      card.addEventListener('pointerleave', leave);
+      return () => {
+        card.removeEventListener('pointermove', move);
+        card.removeEventListener('pointerleave', leave);
+      };
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
