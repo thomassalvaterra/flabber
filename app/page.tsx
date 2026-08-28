@@ -47,6 +47,11 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    document.documentElement.classList.toggle('menu-active', menuOpen);
+    return () => document.documentElement.classList.remove('menu-active');
+  }, [menuOpen]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
@@ -231,9 +236,9 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a>
         <nav aria-label="Navigazione principale"><a href="#top">Home</a><a href="#servizi">Servizi</a><a href="#progetti">Progetti</a><a href="#contatti">Contatti</a></nav>
         <a className="talk" href="#contatti">Parliamone <span>↗</span></a>
-        <button className="menu-button" aria-label="Apri il menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
+        <button className="menu-button" aria-label={menuOpen ? 'Chiudi il menu' : 'Apri il menu'} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
       </header>
-      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} aria-hidden={!menuOpen}>
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`} id="mobile-navigation" aria-hidden={!menuOpen}>
         <a href="#top" onClick={closeMenu}>Home</a><a href="#servizi" onClick={closeMenu}>Servizi</a><a href="#progetti" onClick={closeMenu}>Progetti</a><a href="#contatti" onClick={closeMenu}>Contatti</a>
       </div>
 
