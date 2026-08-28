@@ -35,6 +35,24 @@ export const metadata: Metadata = {
   },
 };
 
+const welcomeBoot = `
+  (() => {
+    const root = document.documentElement;
+    const resetTop = () => window.scrollTo(0, 0);
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    resetTop();
+    addEventListener('pageshow', resetTop, { once: true });
+    try {
+      if (!sessionStorage.getItem('flabber-welcome-seen')) {
+        sessionStorage.setItem('flabber-welcome-seen', '1');
+        root.classList.add('welcome-active');
+        const delay = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1100 : 4400;
+        addEventListener('load', () => setTimeout(() => root.classList.remove('welcome-active'), delay), { once: true });
+      }
+    } catch (_) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,6 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
+      <head><script dangerouslySetInnerHTML={{ __html: welcomeBoot }} /></head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

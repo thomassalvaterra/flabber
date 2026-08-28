@@ -38,6 +38,15 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const resetTop = () => window.scrollTo(0, 0);
+    resetTop();
+    requestAnimationFrame(resetTop);
+    addEventListener('beforeunload', resetTop);
+    return () => removeEventListener('beforeunload', resetTop);
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
@@ -198,10 +207,23 @@ export default function Home() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  const dismissWelcome = () => document.documentElement.classList.remove('welcome-active');
 
   return (
     <main>
       <div className="progress" aria-hidden="true" />
+      <div className="welcome-gate" role="dialog" aria-label="Benvenuto in Flabber Studio">
+        <div className="welcome-grid" aria-hidden="true" />
+        <div className="welcome-orbit welcome-orbit-a" aria-hidden="true" />
+        <div className="welcome-orbit welcome-orbit-b" aria-hidden="true" />
+        <div className="welcome-scene">
+          <div className="welcome-mark"><img src="/branding/flabber-symbol.png" alt="Flabber Studio" /></div>
+          <p className="welcome-wordmark"><strong>FLABBER</strong><span>STUDIO</span></p>
+          <p className="welcome-tagline">Made to <em>move.</em></p>
+        </div>
+        <div className="welcome-loader" aria-hidden="true"><span /></div>
+        <button className="welcome-skip" type="button" onClick={dismissWelcome}>Entra <span>↗</span></button>
+      </div>
       <a className="floating-home-logo" href="#top" aria-label="Torna all'inizio della pagina">
         <img src="/branding/flabber-symbol.png" alt="" />
       </a>
