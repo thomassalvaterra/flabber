@@ -184,7 +184,6 @@ export default function Home() {
         <div className="vignette" />
         <p className="eyebrow">Flabber Studio · Digital Agency</p>
         <h1><span>WE MAKE</span><span>IDEAS <em>MOVE</em></span></h1>
-        <p className="intro">Non facciamo solo contenuti.<br />Costruiamo presenza.</p>
         <a className="scroll" href="#manifesto"><small>SCROLL</small><b>↓</b></a>
       </section>
 
