@@ -202,6 +202,9 @@ export default function Home() {
   return (
     <main>
       <div className="progress" aria-hidden="true" />
+      <a className="floating-home-logo" href="#top" aria-label="Torna all'inizio della pagina">
+        <img src="/branding/flabber-symbol.png" alt="" />
+      </a>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a>
         <nav aria-label="Navigazione principale"><a href="#top">Home</a><a href="#servizi">Servizi</a><a href="#progetti">Progetti</a><a href="#contatti">Contatti</a></nav>
