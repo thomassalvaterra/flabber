@@ -41,3 +41,6 @@
 /* Brand proportions for the circular welcome and floating marks. */
 .welcome-mark img,.floating-home-logo img{transform:scale(1.7)}
 .welcome-wordmark strong{font-family:var(--font-flabber-brand),'Arial Black',Arial,sans-serif;font-weight:900;letter-spacing:-.055em;transform:scaleX(1.035)}
+
+/* Keep every team member visible in the stacked mobile gallery. */
+@media(max-width:760px){.studio-gallery figure,.studio-gallery figure:first-child{aspect-ratio:3/4;background:#050505}.studio-gallery img,.studio-gallery figure:first-child img{object-fit:contain;object-position:center}}
