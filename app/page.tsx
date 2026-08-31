@@ -159,6 +159,77 @@ export default function Home() {
     return () => cleanups.forEach((cleanup) => cleanup());
   }, []);
 
+  useEffect(() => {
+    const carousel = document.querySelector<HTMLElement>('.project-carousel');
+    const track = carousel?.querySelector<HTMLElement>('.project-track');
+    if (!carousel || !track) return;
+
+    const mobile = matchMedia('(max-width: 760px)');
+    let animationFrame = 0;
+    let loopDistance = 0;
+    let offset = 0;
+    let previousTime = 0;
+    let running = false;
+
+    const measure = () => {
+      const frames = track.querySelectorAll<HTMLElement>('.project-frame');
+      const first = frames[0];
+      const repeatedFirst = frames[projectImages.length];
+      if (!first || !repeatedFirst) return;
+      loopDistance = repeatedFirst.offsetLeft - first.offsetLeft;
+      if (loopDistance > 0) offset %= loopDistance;
+    };
+
+    const move = (time: number) => {
+      if (!running) return;
+      if (!previousTime) previousTime = time;
+      const elapsed = Math.min(time - previousTime, 64);
+      previousTime = time;
+      if (loopDistance > 0) {
+        offset = (offset + elapsed * .03) % loopDistance;
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      }
+      animationFrame = requestAnimationFrame(move);
+    };
+
+    const start = () => {
+      if (running || !mobile.matches) return;
+      running = true;
+      previousTime = 0;
+      carousel.classList.add('mobile-ticker-active');
+      track.dataset.mobileTicker = 'true';
+      measure();
+      animationFrame = requestAnimationFrame(move);
+    };
+
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(animationFrame);
+      previousTime = 0;
+      carousel.classList.remove('mobile-ticker-active');
+      delete track.dataset.mobileTicker;
+      track.style.removeProperty('transform');
+    };
+
+    const updateMode = () => {
+      if (mobile.matches) start();
+      else stop();
+    };
+    const resume = () => { previousTime = 0; };
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+    mobile.addEventListener('change', updateMode);
+    document.addEventListener('visibilitychange', resume);
+    updateMode();
+
+    return () => {
+      stop();
+      resizeObserver.disconnect();
+      mobile.removeEventListener('change', updateMode);
+      document.removeEventListener('visibilitychange', resume);
+    };
+  }, []);
+
   const closeMenu = () => setMenuOpen(false);
   const dismissWelcome = () => document.documentElement.classList.remove('welcome-active');
 
