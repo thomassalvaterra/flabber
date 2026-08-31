@@ -186,7 +186,7 @@ export default function Home() {
       const elapsed = Math.min(time - previousTime, 64);
       previousTime = time;
       if (loopDistance > 0) {
-        offset = (offset + elapsed * .03) % loopDistance;
+        offset = (offset + elapsed * .052) % loopDistance;
         track.style.transform = `translate3d(${-offset}px, 0, 0)`;
       }
       animationFrame = requestAnimationFrame(move);
