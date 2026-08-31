@@ -45,3 +45,6 @@
 /* Keep every team member visible in the stacked mobile gallery. */
 @media(max-width:760px){.studio-gallery figure,.studio-gallery figure:first-child{aspect-ratio:3/4;background:#050505}.studio-gallery img,.studio-gallery figure:first-child img{object-fit:contain;object-position:center}}
 @media(max-width:760px){.studio-gallery figure:nth-child(3) img{object-fit:cover;object-position:50% top}}
+
+/* The service list now follows the introduction directly. */
+.services .service-list{margin-top:0}

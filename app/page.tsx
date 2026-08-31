@@ -2,16 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const serviceSlides = [
-  { src: '/services/01-overview.png', alt: 'Tutto quello che ti serve - panoramica dei servizi Flabber Studio' },
-  { src: '/services/02-comunicazione.png', alt: 'Comunicazione - dire la cosa giusta, nel momento giusto, alle persone giuste' },
-  { src: '/services/03-posizionamento.png', alt: 'Posizionamento - trovare uno spazio riconoscibile nel mercato' },
-  { src: '/services/04-strategia.png', alt: 'Strategia - un piano digitale costruito sugli obiettivi' },
-  { src: '/services/05-contenuti.png', alt: 'Contenuti - testi, visual e video che fanno fermare lo scroll' },
-  { src: '/services/06-crescita.png', alt: 'Crescita - community, visibilità e conversioni reali' },
-  { src: '/services/07-cta.png', alt: 'Se hai una attività che merita di essere vista, parliamoci' },
-];
-
 const services = [
   { title: 'Comunicazione', text: 'La comunicazione non è dire tutto. È capire cosa dire, a chi dirlo e come farlo arrivare nel modo giusto. Perché ogni attività ha qualcosa da raccontare, ma non tutte riescono a farlo percepire.', glyph: 'eye' },
   { title: 'Posizionamento', text: 'In un mercato pieno di alternative, essere presenti non basta. Troviamo ciò che rende la tua attività diversa e lo trasformiamo in qualcosa di riconoscibile.', glyph: 'rings' },
@@ -137,48 +127,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const stage = document.querySelector<HTMLElement>('.service-deck-stage');
-    const viewport = document.querySelector<HTMLElement>('.service-deck-viewport');
-    const track = document.querySelector<HTMLElement>('.service-deck-track');
-    if (!stage || !viewport || !track) return;
-
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let frame = 0;
-    let travel = 0;
-
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        if (reduced) {
-          track.style.transform = '';
-          return;
-        }
-        const offset = Math.min(Math.max(-stage.getBoundingClientRect().top, 0), travel);
-        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
-      });
-    };
-
-    const measure = () => {
-      travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
-      stage.style.height = reduced ? 'auto' : `${innerHeight + travel}px`;
-      update();
-    };
-
-    track.querySelectorAll('img').forEach((image) => {
-      if (!image.complete) image.addEventListener('load', measure, { once: true });
-    });
-    addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', measure);
-    measure();
-
-    return () => {
-      cancelAnimationFrame(frame);
-      removeEventListener('scroll', update);
-      removeEventListener('resize', measure);
-    };
-  }, []);
-
-  useEffect(() => {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (reduced || !canHover) return;
@@ -267,28 +215,6 @@ export default function Home() {
       <section className="services section" id="servizi">
         <div className="label reveal"><span>02</span>Cosa facciamo</div>
         <div className="services-title reveal"><h2>Tutto quello<br />che <em>ti serve.</em></h2><p>Dalla gestione dei social alla produzione di contenuti, dai siti web alla strategia digitale: coinvolgiamo le competenze necessarie per trasformare le idee in risultati concreti.</p></div>
-        <div className="service-deck-stage">
-          <div className="service-deck-sticky">
-            <div className="deck-heading reveal"><span>La nostra direzione, in sette frame</span><span>Scorri verso il basso ↓</span></div>
-            <div className="service-deck-viewport" aria-label="Presentazione dei servizi Flabber Studio">
-              <div className="service-deck-track">
-                {serviceSlides.map((slide, index) => (
-                  <figure key={slide.src}>
-                    {index === serviceSlides.length - 1 ? (
-                      <div className="service-cta-slide" role="img" aria-label={slide.alt}>
-                        <span className="cta-kicker">Digital Agency</span>
-                        <span className="cta-ready">Pronti quando lo sei tu</span>
-                        <h3><span>Se hai un&apos;attività</span><span>che merita</span><span>di essere vista,</span><em>parliamoci.</em></h3>
-                        <span className="cta-signature">Flabber Studio</span>
-                      </div>
-                    ) : <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" />}
-                    <figcaption>{String(index + 1).padStart(2, '0')} / 07</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="service-list">
           {services.map((service, index) => <article className="service reveal" key={service.title}><b>{String(index + 1).padStart(2, '0')}</b><h3>{service.title}</h3><p>{service.text}</p><i className={`glyph ${service.glyph}`} aria-hidden="true" /></article>)}
         </div>
