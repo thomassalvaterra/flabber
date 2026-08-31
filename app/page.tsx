@@ -228,7 +228,25 @@ export default function Home() {
 
       <section className="process section" id="metodo">
         <div className="label reveal"><span>04</span>Il nostro metodo</div>
-        <div className="process-grid"><div><h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2><p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p></div><div className="steps"><article className="reveal"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div></article><article className="reveal"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div></article><article className="reveal"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div></article></div></div>
+        <div className="process-grid">
+          <div className="process-copy">
+            <h2 className="reveal">Una direzione.<br /><em>Azioni concrete.</em></h2>
+            <p className="method-intro reveal">Ogni progetto parte da una comprensione reale dell&apos;attività che abbiamo davanti. Perché una presenza efficace non nasce da un singolo contenuto.</p>
+          </div>
+          <div className="method-map reveal" aria-label="Le tre fasi del metodo Flabber">
+            <div className="method-orbits" aria-hidden="true"><i /><i /><i /></div>
+            <div className="method-core" aria-hidden="true"><span>Idea</span><b>→</b><span>Presenza</span></div>
+            <article className="method-node method-node-one">
+              <div className="method-card-inner"><b>01</b><div><h3>Comprendiamo</h3><p>Analizziamo il contesto, le persone, il mercato e gli obiettivi reali.</p></div><span aria-hidden="true">↗</span></div>
+            </article>
+            <article className="method-node method-node-two">
+              <div className="method-card-inner"><b>02</b><div><h3>Definiamo</h3><p>Costruiamo una direzione chiara, coerente con ciò che rende l&apos;attività riconoscibile.</p></div><span aria-hidden="true">↗</span></div>
+            </article>
+            <article className="method-node method-node-three">
+              <div className="method-card-inner"><b>03</b><div><h3>Trasformiamo</h3><p>Portiamo la strategia nelle azioni, con costanza, coerenza e valore nel tempo.</p></div><span aria-hidden="true">↗</span></div>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section className="studio section" id="studio">
