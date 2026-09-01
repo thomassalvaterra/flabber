@@ -48,7 +48,7 @@
   }
 
   .project-track{
-    animation:project-loop-mobile 28s linear infinite;
+    animation:project-loop-mobile 18s linear infinite;
     animation-play-state:running;
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
