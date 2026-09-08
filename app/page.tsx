@@ -350,7 +350,15 @@ export default function Home() {
       <section className="contact" id="contatti">
         <div className="contact-orb" aria-hidden="true"><i /><b /></div><div className="label reveal"><span>07</span>Contatti</div>
         <h2 className="contact-title reveal"><span>Se hai un&apos;attività</span><span>che merita di essere <em>vista,</em></span><span>parliamoci.</span></h2><a className="mail reveal" href="mailto:info@flabber.it">info@flabber.it <span>↗</span></a>
-        <div className="contact-details reveal"><a href="tel:+393349950761">3349950761</a><address>Via Alessandro Rossi, 101<br />36013 Piovene Rocchette (VI)</address></div>
+          <div className="contact-details reveal">
+            <a href="tel:+393349950761">3349950761</a>
+            <address>
+              Flabber Studio<br />
+              Tommaso Merlo<br />
+              P. IVA 04521680241<br />
+              36013 Piovene Rocchette (VI)
+            </address>
+          </div>
         <footer><a className="brand footer-brand" href="#top" aria-label="Flabber Studio - torna all'inizio"><span className="brand-lockup"><img src="/branding/flabber-lockup.png" alt="Flabber Studio" /></span></a><p>Digital Agency · Italy<br />© 2026 Flabber Studio</p><a href="#top">Torna su ↑</a></footer>
       </section>
     </main>
