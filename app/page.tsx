@@ -23,9 +23,38 @@ const projectImages = [
   { src: '/projects/project-08.webp', alt: 'Shooting fotografico lifestyle in studio' },
 ];
 
+const kineticWords = ['Made to move', 'Branding', 'Shooting', 'Video', 'Social', 'Advertising', 'Siti web', 'Strategia'];
+
+const splitChars = (text: string, start: number) =>
+  Array.from(text).map((char, index) => (
+    <i className="ch" aria-hidden="true" key={index} style={{ '--i': start + index } as React.CSSProperties}>
+      {char === ' ' ? ' ' : char}
+    </i>
+  ));
+
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const countRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const count = countRef.current;
+    if (!count || !document.documentElement.classList.contains('welcome-active')) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { count.textContent = '100'; return; }
+    // Stessa curva e durata della barra .intro-line (0.2s di ritardo, 3.1s)
+    const start = performance.now() + 200;
+    const duration = 3100;
+    let frame = 0;
+    const tick = (now: number) => {
+      const t = Math.min(Math.max((now - start) / duration, 0), 1);
+      const eased = t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      count.textContent = String(Math.round(eased * 100));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -104,9 +133,25 @@ export default function Home() {
   useEffect(() => {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const progress = document.querySelector<HTMLElement>('.progress');
+    const hero = document.querySelector<HTMLElement>('.hero');
+    const band = document.querySelector<HTMLElement>('.kinetic-band');
+    let lastY = scrollY;
+    let skew = 0;
+    let skewFrame = 0;
+    const settleSkew = () => {
+      skew *= .88;
+      band?.style.setProperty('--skew', `${skew.toFixed(2)}deg`);
+      skewFrame = Math.abs(skew) > .05 ? requestAnimationFrame(settleSkew) : 0;
+    };
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - innerHeight;
       if (progress) progress.style.transform = `scaleX(${max ? scrollY / max : 0})`;
+      if (reduced) return;
+      if (hero) hero.style.setProperty('--hp', Math.min(scrollY / innerHeight, 1).toFixed(3));
+      const velocity = scrollY - lastY;
+      lastY = scrollY;
+      skew = Math.max(-8, Math.min(8, skew + velocity * .08));
+      if (!skewFrame) skewFrame = requestAnimationFrame(settleSkew);
     };
     addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -114,6 +159,7 @@ export default function Home() {
       document.querySelectorAll('.reveal').forEach((node) => node.classList.add('visible'));
       return () => removeEventListener('scroll', onScroll);
     }
+    document.querySelectorAll<HTMLElement>('.competency').forEach((node, index) => node.style.setProperty('--stagger', `${(index % 2) * 90 + Math.floor(index / 2) * 70}ms`));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -123,7 +169,51 @@ export default function Home() {
       });
     }, { threshold: .14 });
     document.querySelectorAll('.reveal').forEach((node) => observer.observe(node));
-    return () => { observer.disconnect(); removeEventListener('scroll', onScroll); };
+    return () => { observer.disconnect(); removeEventListener('scroll', onScroll); cancelAnimationFrame(skewFrame); };
+  }, []);
+
+  useEffect(() => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const cursor = document.querySelector<HTMLElement>('.cursor-ring');
+    if (reduced || !canHover || !cursor) return;
+
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, frame = 0;
+    const interactive = 'a, button, .competency, .project-frame, .studio-gallery figure, .service';
+    const move = (event: PointerEvent) => {
+      x = event.clientX; y = event.clientY;
+      cursor.classList.add('on');
+      const target = event.target as Element | null;
+      cursor.classList.toggle('hover', !!target?.closest(interactive));
+    };
+    const leave = () => cursor.classList.remove('on');
+    const tick = () => {
+      cx += (x - cx) * .2; cy += (y - cy) * .2;
+      cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      frame = requestAnimationFrame(tick);
+    };
+    addEventListener('pointermove', move, { passive: true });
+    document.addEventListener('pointerleave', leave);
+    frame = requestAnimationFrame(tick);
+
+    const magnets = Array.from(document.querySelectorAll<HTMLElement>('.talk, .mail, .welcome-skip'));
+    const magnetCleanups = magnets.map((item) => {
+      const pull = (event: PointerEvent) => {
+        const rect = item.getBoundingClientRect();
+        item.style.translate = `${((event.clientX - rect.left - rect.width / 2) * .25).toFixed(1)}px ${((event.clientY - rect.top - rect.height / 2) * .35).toFixed(1)}px`;
+      };
+      const release = () => { item.style.translate = ''; };
+      item.addEventListener('pointermove', pull);
+      item.addEventListener('pointerleave', release);
+      return () => { item.removeEventListener('pointermove', pull); item.removeEventListener('pointerleave', release); };
+    });
+
+    return () => {
+      removeEventListener('pointermove', move);
+      document.removeEventListener('pointerleave', leave);
+      cancelAnimationFrame(frame);
+      magnetCleanups.forEach((cleanup) => cleanup());
+    };
   }, []);
 
   useEffect(() => {
@@ -131,7 +221,7 @@ export default function Home() {
     const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (reduced || !canHover) return;
 
-    const cards = Array.from(document.querySelectorAll<HTMLElement>('.project-frame, .studio-gallery figure'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.project-frame, .studio-gallery figure, .competency'));
     const cleanups = cards.map((card) => {
       const move = (event: PointerEvent) => {
         const rect = card.getBoundingClientRect();
@@ -231,22 +321,42 @@ export default function Home() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-  const dismissWelcome = () => document.documentElement.classList.remove('welcome-active');
+  const dismissWelcome = () => {
+    const root = document.documentElement;
+    if (!root.classList.contains('welcome-active') || root.classList.contains('welcome-leaving')) return;
+    root.classList.add('welcome-leaving');
+    setTimeout(() => root.classList.remove('welcome-active', 'welcome-leaving'), 650);
+  };
 
   return (
     <main>
       <div className="progress" aria-hidden="true" />
+      <div className="cursor-ring" aria-hidden="true" />
       <div className="welcome-gate" role="dialog" aria-label="Benvenuto in Flabber Studio">
-        <div className="welcome-grid" aria-hidden="true" />
-        <div className="welcome-orbit welcome-orbit-a" aria-hidden="true" />
-        <div className="welcome-orbit welcome-orbit-b" aria-hidden="true" />
-        <div className="welcome-scene">
-          <div className="welcome-mark"><img src="/branding/flabber-symbol.png" alt="Flabber Studio" /></div>
-          <p className="welcome-wordmark"><strong>FLABBER</strong><span>STUDIO</span></p>
-          <p className="welcome-tagline">Made to <em>move.</em></p>
+        <div className="intro-glow" aria-hidden="true" />
+        <div className="intro-top">
+          <span>Flabber Studio — Digital Agency</span>
+          <button className="welcome-skip" type="button" onClick={dismissWelcome}>Entra <span>↗</span></button>
         </div>
-        <div className="welcome-loader" aria-hidden="true"><span /></div>
-        <button className="welcome-skip" type="button" onClick={dismissWelcome}>Entra <span>↗</span></button>
+        <div className="intro-center">
+          <div className="intro-coin" aria-hidden="true">
+            <i className="intro-ring" />
+            <i className="intro-ring intro-ring-b" />
+            <div className="intro-coin-face"><img src="/branding/flabber-symbol.png" alt="" /></div>
+          </div>
+          <p className="intro-word" aria-label="Flabber Studio">
+            {Array.from('FLABBER').map((letter, index) => (
+              <span key={index} aria-hidden="true"><i style={{ '--i': index } as React.CSSProperties}>{letter}</i></span>
+            ))}
+          </p>
+          <p className="intro-sub" aria-hidden="true">STUDIO</p>
+        </div>
+        <div className="intro-bottom" aria-hidden="true">
+          <p className="intro-tagline"><span><i>Made to</i></span> <span><em>move.</em></span></p>
+          <p className="intro-count"><b ref={countRef}>0</b><span>%</span></p>
+        </div>
+        <div className="intro-line" aria-hidden="true"><span /></div>
+        <div className="intro-wipe" aria-hidden="true"><span>Made to <em>move.</em></span></div>
       </div>
       <a className="floating-home-logo" href="#top" aria-label="Torna all'inizio della pagina">
         <img src="/branding/flabber-symbol.png" alt="" />
@@ -265,7 +375,7 @@ export default function Home() {
         <canvas ref={canvasRef} aria-label="Forma tridimensionale astratta animata" />
         <div className="vignette" />
         <p className="eyebrow">Flabber Studio · Digital Agency</p>
-        <h1><span>WE MAKE</span><span>IDEAS <em>MOVE</em></span></h1>
+        <h1 aria-label="We make ideas move"><span>{splitChars('WE MAKE', 0)}</span><span>{splitChars('IDEAS ', 7)}<em>{splitChars('MOVE', 13)}</em></span></h1>
       </section>
 
       <section className="teaser" id="manifesto">
@@ -281,6 +391,16 @@ export default function Home() {
           </figure>
         </div>
       </section>
+
+      <div className="kinetic-band" aria-hidden="true">
+        {[0, 1].map((row) => (
+          <div className={`kinetic-row kinetic-row-${row}`} key={row}>
+            <div className="kinetic-track">
+              {[...kineticWords, ...kineticWords].map((word, index) => <span key={index}>{word}<b>✦</b></span>)}
+            </div>
+          </div>
+        ))}
+      </div>
 
       <section className="services section" id="servizi">
         <div className="label reveal"><span>02</span>Cosa facciamo</div>
